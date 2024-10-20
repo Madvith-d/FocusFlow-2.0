@@ -23,23 +23,24 @@ function App() {
   const notificationIntervalRef = useRef<NodeJS.Timeout | null>(null);
 
   const handleDistraction = useCallback(() => {
-    setIsDistracted(true);
-    showNotification('Distraction detected');
-    
-    if (distractionTimeout) {
-      clearTimeout(distractionTimeout);
+    if (isStudying && !isBreak) {
+      setIsDistracted(true);
+      showNotification('Distraction detected');
+      
+      if (distractionTimeout) {
+        clearTimeout(distractionTimeout);
+      }
+
+      const timeout = setTimeout(() => {
+        setIsDistracted(false);
+      }, Math.min(30000, studyTime * 1000 * 0.1));
+
+      setDistractionTimeout(timeout);
     }
-
-    const timeout = setTimeout(() => {
-      setIsDistracted(false);
-    }, Math.min(30000, studyTime * 1000 * 0.1));
-
-    setDistractionTimeout(timeout);
   }, [isStudying, isBreak, studyTime, distractionTimeout]);
 
   const handleVisibilityChange = useCallback(() => {
     if (document.hidden) {
-      setIsTabActive(false);
       if (isStudying && !isBreak) {
         handleDistraction();
         // Start sending notifications every 5 seconds
@@ -48,14 +49,13 @@ function App() {
         }, 5000);
       }
     } else {
-      setIsTabActive(true);
       // Clear the notification interval when the tab becomes active
       if (notificationIntervalRef.current) {
         clearInterval(notificationIntervalRef.current);
         notificationIntervalRef.current = null;
       }
     }
-  }, [isStudying, isBreak]);
+  }, [isStudying, isBreak, handleDistraction]);
 
   useEffect(() => {
     document.addEventListener('visibilitychange', handleVisibilityChange);
@@ -110,8 +110,16 @@ function App() {
   };
 
   const showNotification = (message: string) => {
-    if ('Notification' in window && Notification.permission === 'granted') {
-      new Notification('Pomodoro Timer', { body: message });
+    if ('Notification' in window) {
+      if (Notification.permission === 'granted') {
+        new Notification('Focus Flow', { body: message });
+      } else if (Notification.permission !== 'denied') {
+        Notification.requestPermission().then(permission => {
+          if (permission === 'granted') {
+            new Notification('Focus Flow', { body: message });
+          }
+        });
+      }
     }
   };
 
