@@ -3,13 +3,13 @@ import { Play, Pause, SkipBack, SkipForward, Volume2 } from 'lucide-react';
 
 const MusicPlayer: React.FC = () => {
   const [isPlaying, setIsPlaying] = useState(false);
-  const [currentSong] = useState('Focus LoFi');
+  const [currentSong] = useState('Focus Music');
   const [volume, setVolume] = useState(50);
   const audioRef = useRef<HTMLAudioElement | null>(null);
 
   const togglePlay = () => {
     if (!audioRef.current) {
-      audioRef.current = new Audio('/spotifydown.com - Focus LoFi.mp3');
+      audioRef.current = new Audio('/music.mp3');
       audioRef.current.loop = true;
       audioRef.current.volume = volume / 100;
     }
