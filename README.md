@@ -1,6 +1,6 @@
 # Focus Flow By TECHZ GPT team
 
-![Focus Flow Logo](https://your-logo-url-here.com/focus-flow-logo.png)
+
 
 Focus Flow is a beautiful and feature-rich Pomodoro timer application designed to boost productivity and maintain focus during work or study sessions. With a sleek interface, customizable backgrounds, and integrated features like a focus plant and music player, Focus Flow helps users manage their time effectively and stay motivated.
 
@@ -14,11 +14,8 @@ Focus Flow is a beautiful and feature-rich Pomodoro timer application designed t
 - **Distraction Detection**: Alerts when you leave the Focus Flow tab
 - **Responsive Design**: Works seamlessly on desktop and mobile devices
 
-## Screenshots
 
-![Main Interface](https://your-screenshot-url-here.com/main-interface.png)
-![Focus Plant](https://your-screenshot-url-here.com/focus-plant.png)
-![Background Selection](https://your-screenshot-url-here.com/background-selection.png)
+
 
 ## Installation
 
