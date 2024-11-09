@@ -1,4 +1,4 @@
-# Focus Flow By TECHZ GPT team
+# Focus Flow 
 
 
 
